@@ -12,7 +12,7 @@ pipeline{
         stage("SonarQube Quality Analysis"){
             steps{
                 withSonarQubeEnv("Sonar"){
-                    sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=Nodejs-application -Dsonar.projectKey=Nodejs-application"
+                    sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=two-tier-flask-app -Dsonar.projectKey=two-tier-flask-app"
                 }
             }
         }
@@ -23,7 +23,7 @@ pipeline{
         }
         stage("Build Docker Image"){
             steps{
-                sh 'docker build -t hinaar/devsecops-1.1 .'
+                sh 'docker build -t hinaar/flaskappproject-1.1 .'
             }
         }
         stage("Push Docker Hub"){
@@ -31,7 +31,7 @@ pipeline{
                 withCredentials([string(credentialsId: 'hinaardocker', variable: 'hinaardocker')]) {
                     sh 'docker login -u hinaar -p ${hinaardocker}'
                 }
-                sh 'docker push hinaar/devsecops-1.1'
+                sh 'docker push hinaar/flaskappproject-1.1'
             }
         }
     }
