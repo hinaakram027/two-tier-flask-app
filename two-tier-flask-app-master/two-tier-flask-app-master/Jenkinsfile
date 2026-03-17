@@ -6,7 +6,7 @@ pipeline{
     stages{
         stage("Clone Code from Github"){
             steps{
-                git url: "https://github.com/hinaakram027/Nodejs-application", branch: "main"
+                git url: "https://github.com/hinaakram027/two-tier-flask-app", branch: "main"
             }
         }
         stage("SonarQube Quality Analysis"){
